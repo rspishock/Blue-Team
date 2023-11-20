@@ -26,7 +26,7 @@ output_file = options.output
 
 print('\n\t\t\t\t***DISCLAIMER***')
 print('\nAll information returned from this script should be considered at face value and as a potential jump point for further analysis.')
-print('\nUpon completion of the script, a deeper analysis should be performed to determine whether the suspected code is in fact malware.\n')
+print('\nUpon completion of the script, a deeper analysis should be performed to determine whether the suspected email is in fact a phishing attempt.\n')
 # script will pause for 15 seconds to give the user a chance to read the disclaimer
 sleep(15)
 
