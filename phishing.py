@@ -40,21 +40,30 @@ if path.exists(input_file):
         for line in file_object:
             # recipient regex
             email_regex = re.compile(f'[a-z0-9]@[a-z0-9].[a-z]')
-            file = email_regex.search(line)
+            email = email_regex.search(line)
 
             # subject regex
             subject_regex = re.compile(f'Subject [a-zA-Z0-9_\s]+')
-            file = subject_regex.search(line)
+            subject = subject_regex.search(line)
 
             # sender regex
             sender_regex = re.compile(f'From [a-zA-Z0-9_\s]+]')
-            file = sender_regex.search(line)
+            sender = sender_regex.search(line)
 
             # x-sender regex
-
+            xsender_regex = re.compile(f'xsender [a-zA-Z0-9_\s]+')
+            
             # reply regex
 
             # date/time regex
+
+            return[email, subject, sender,]
+
+            
+    # file output
+    with open(output_file, 'w') as f:
+
+
 
 else:
     print(f'File {input_file} not found.\nMake sure file exists and run script again.')
