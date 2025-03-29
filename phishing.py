@@ -38,6 +38,8 @@ if path.exists(input_file):
     print(f'Parsing {input_file}...')
     with open(input_file) as file_object:
         for line in file_object:
+            """Metadata regexes"""
+
             # recipient regex
             email_regex = re.compile(f'[a-z0-9]@[a-z0-9].[a-z]')
             email = email_regex.search(line)
@@ -52,20 +54,22 @@ if path.exists(input_file):
 
             # x-sender regex
             xsender_regex = re.compile(f'xsender [a-zA-Z0-9_\s]+')
+            xsender = xsender_regex.search(line)
             
             # reply regex
+            reply_regex = re.compile(f'Reply
 
             # date/time regex
 
-            return[email, subject, sender,]
+            return[email, subject, sender, xsender, ]
 
             
     # file output
     with open(output_file, 'w') as f:
 
 
+    print(f'Script completed successfully.  Check "{output_file}" for more information.')
 
 else:
     print(f'File {input_file} not found.\nMake sure file exists and run script again.')
     sys.exit(0)
-#except
