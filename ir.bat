@@ -28,3 +28,8 @@ net use >> connections
 rem view active TCP connections
 netstat -anob >> netstat.txt
 
+
+rem *********************************************
+rem *              End of script                *
+rem *********************************************
+echo Script completed successfully.  Check file %directory% for more information.
