@@ -14,11 +14,17 @@ goto End
 :End
 
 rem *********************************************
-rem *               Perform scan                *
+rem *               Perform scans               *
 rem *********************************************
 rem view network shares
 net share \\127.0.0.1 >> netshares.txt
 
 rem view network sessions
-net session
+net session >> sessions.txt
+
+rem lists information related to mapped connections
+net use >> connections
+
+rem view active TCP connections
+netstat -anob >> netstat.txt
 
