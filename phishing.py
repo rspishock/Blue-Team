@@ -1,6 +1,6 @@
 #! /usr/bin/python3
 """
-This script will parse .eml files extracting common indicators used in phishing emails.
+This script will parse .eml files extracting common IOCs used in phishing emails.
 """
 
 import argparse
@@ -38,7 +38,7 @@ if path.exists(input_file):
     print(f'Parsing {input_file}...')
     with open(input_file) as file_object:
         for line in file_object:
-            """Metadata regexes"""
+            # Metadata regexes
 
             # recipient regex
             email_regex = re.compile(f'[a-z0-9]@[a-z0-9].[a-z]')
@@ -57,16 +57,18 @@ if path.exists(input_file):
             xsender = xsender_regex.search(line)
             
             # reply regex
-            reply_regex = re.compile(f'Reply
+            reply_regex = re.compile(f'Reply [a-zA-Z0-9_\s]+')
+            reply = reply_regex.search(line)
 
             # date/time regex
 
-            return[email, subject, sender, xsender, ]
+            #return[email, subject, sender, xsender, reply]
 
             
     # file output
-    with open(output_file, 'w') as f:
-
+    with open(output_file, 'w') as file_output:
+        for line in [email, subject, sender, xsender, reply]
+            print(f'email, subject, sender, xsender, reply]')
 
     print(f'Script completed successfully.  Check "{output_file}" for more information.')
 
