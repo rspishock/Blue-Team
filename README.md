@@ -21,4 +21,4 @@ Note: This output is not intended to be an all inclusive investigation into the 
 a quick look at these processes.
 
 ### Usage:
-./volatility_ps_parse.sh <memoryfile>
+./volatility_ps_parse.sh <memory file>

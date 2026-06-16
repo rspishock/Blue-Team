@@ -41,8 +41,8 @@ if path.exists(input_file):
             # Metadata regexes
 
             # recipient regex
-            email_regex = re.compile(f'[a-z0-9]@[a-z0-9].[a-z]')
-            email = email_regex.search(line)
+            recipient_regex = re.compile(f'[a-z0-9]@[a-z0-9].[a-z]')
+            recipient = recipient_regex.search(line)
 
             # subject regex
             subject_regex = re.compile(f'Subject [a-zA-Z0-9_\s]+')
@@ -67,8 +67,24 @@ if path.exists(input_file):
             
     # file output
     with open(output_file, 'w') as file_output:
-        for line in [email, subject, sender, xsender, reply]
-            print(f'email, subject, sender, xsender, reply]')
+        print(f'IOCs from file: {input_file}')
+        # recipient
+        for line in recipient:
+            print(line)
+        #[email, subject, sender, xsender, reply]
+        #    print(f'email, subject, sender, xsender, reply]')
+
+        # sender
+        for line in recipient:
+            print(line)
+
+        # x-sender
+        for line in recipient:
+            print(line)
+
+        # reply
+        for line in recipient:
+            print(line)
 
     print(f'Script completed successfully.  Check "{output_file}" for more information.')
 
