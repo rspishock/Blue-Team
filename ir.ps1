@@ -19,9 +19,13 @@ if (Test-Path -Path $DIRECTORY) {
 
 
 # view network sessions
-
+echo "Sessions:" >> connections.txt
+Get-NetTCPConnection >> connections.txt
 
 #lists information related to mapped connections
 
 
 # view active TCP connections
+echo "Active connections:"
+Get-NetTCPConnection -State Established >> connections.txt
+
