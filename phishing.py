@@ -75,15 +75,15 @@ if path.exists(input_file):
         #    print(f'email, subject, sender, xsender, reply]')
 
         # sender
-        for line in recipient:
+        for line in sender:
             print(line)
 
         # x-sender
-        for line in recipient:
+        for line in xsender:
             print(line)
 
         # reply
-        for line in recipient:
+        for line in reply:
             print(line)
 
     print(f'Script completed successfully.  Check "{output_file}" for more information.')
