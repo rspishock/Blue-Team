@@ -15,7 +15,7 @@ def get_arguments():
     parser = argparse.ArgumentParser()
     parser.add_argument('-i', '--input', dest='input', help='The .eml file to analyze.')
     parser.add_argument('-o', '--output', dest='output', help='File to write parsed strings to.')
-    parser.add_argument('-h', '--help', )
+    # parser.add_argument('-h', '--help', )
     options = parser.parse_args()
 
     return options
@@ -34,14 +34,18 @@ email is in fact a phishing attempt.\n''')
 sleep(15)
 
 # try:
-if path.exists(input_file):
+if not path.exists(input) or path:
+    print(f'File {input_file} not found.\nMake sure file exists and run script again.')
+    sys.exit(0)
+else:
+    # path.exists(input_file):
     print(f'Parsing {input_file}...')
     with open(input_file) as file_object:
         for line in file_object:
             # Metadata regexes
 
             # recipient regex
-            recipient_regex = re.compile(f'[a-z0-9]@[a-z0-9].[a-z]')
+            recipient_regex = re.compile(f'[a-z0-9]@[a-z0-9]\.[a-z]')
             recipient = recipient_regex.search(line)
 
             # subject regex
@@ -88,6 +92,6 @@ if path.exists(input_file):
 
     print(f'Script completed successfully.  Check "{output_file}" for more information.')
 
-else:
-    print(f'File {input_file} not found.\nMake sure file exists and run script again.')
-    sys.exit(0)
+# else:
+#     print(f'File {input_file} not found.\nMake sure file exists and run script again.')
+#     sys.exit(0)
