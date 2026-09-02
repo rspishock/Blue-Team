@@ -13,8 +13,8 @@ from time import sleep
 def get_arguments():
     """Get user supplied arguments from terminal"""
     parser = argparse.ArgumentParser()
-    parser.add_argument('-i', '--input', dest='input', help='The .eml file to analyze.')
-    parser.add_argument('-o', '--output', dest='output', help='File to write parsed strings to.')
+    parser.add_argument('-i', '--input', default="", dest='input', help='The .eml file to analyze.')
+    parser.add_argument('-o', '--output', default="", dest='output', help='File to write parsed strings to.')
     # parser.add_argument('-h', '--help', )
     options = parser.parse_args()
 
@@ -31,7 +31,7 @@ point for further analysis.''')
 print('''\nUpon completion of the script, a deeper analysis should be performed to determine whether the suspected 
 email is in fact a phishing attempt.\n''')
 # script will pause for 15 seconds to give the user a chance to read the disclaimer
-sleep(15)
+sleep(8)
 
 # try:
 if not path.exists(input) or path:
