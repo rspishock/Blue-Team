@@ -1,7 +1,6 @@
 #! /usr/bin/python3
-"""
-This script will parse .eml files extracting common IOCs used in phishing emails.
-"""
+
+#This script will parse .eml files extracting common IOCs used in phishing emails.
 
 import argparse
 import re
@@ -10,27 +9,36 @@ import sys
 from os import path
 from time import sleep
 
-def get_arguments():
-    """Get user supplied arguments from terminal"""
-    parser = argparse.ArgumentParser()
-    parser.add_argument('-i', '--input', default="", dest='input', help='The .eml file to analyze.')
-    parser.add_argument('-o', '--output', default="", dest='output', help='File to write parsed strings to.')
-    # parser.add_argument('-h', '--help', )
-    options = parser.parse_args()
+# def get_arguments():
+#     """Get user supplied arguments from terminal"""
+#     parser = argparse.ArgumentParser()
+#     parser.add_argument('-i', '--input', default="", dest='input', help='The .eml file to analyze.')
+#     parser.add_argument('-o', '--output', default="", dest='output', help='File to write parsed strings to.')
+#     # parser.add_argument('-h', '--help', )
+#     options = parser.parse_args()
 
-    return options
+#     return options
+
+# Set up parsers
+parser = argparse.ArgumentParser(description="Specifies the input and output files for the script..")
+
+# Set required=True to prevent omission
+parser.add_argument('-i', '--input', required=True, dest='input', help='The .eml file to analyze.')
+parser.add_argument('-o', '--output', required=True, dest='output', help='File to write parsed strings to.')
+
+args = parser.parse_args()
 
 # argument variables
-options = get_arguments()
-input_file = options.input
-output_file = options.output
+# options = get_arguments()
+# input_file = options.input
+# output_file = options.output
 
 print('\n\t\t\t\t***DISCLAIMER***')
 print('''\nAll information returned from this script should be considered at face value and as a potential starting 
 point for further analysis.''')
 print('''\nUpon completion of the script, a deeper analysis should be performed to determine whether the suspected 
 email is in fact a phishing attempt.\n''')
-# script will pause for 15 seconds to give the user a chance to read the disclaimer
+# script will pause for 8 seconds to give the user a chance to read the disclaimer
 sleep(8)
 
 # try:
