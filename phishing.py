@@ -68,7 +68,7 @@ else:
 
             # date/time regex
 
-            return[email, subject, sender, xsender, reply]
+            # return[email, subject, sender, xsender, reply]
 
             
     # file output
