@@ -9,15 +9,6 @@ import sys
 from os import path
 from time import sleep
 
-# def get_arguments():
-#     """Get user supplied arguments from terminal"""
-#     parser = argparse.ArgumentParser()
-#     parser.add_argument('-i', '--input', default="", dest='input', help='The .eml file to analyze.')
-#     parser.add_argument('-o', '--output', default="", dest='output', help='File to write parsed strings to.')
-#     # parser.add_argument('-h', '--help', )
-#     options = parser.parse_args()
-
-#     return options
 
 # Set up parsers
 parser = argparse.ArgumentParser(description="Specifies the input and output files for the script..")
@@ -28,10 +19,6 @@ parser.add_argument('-o', '--output', required=True, dest='output', help='File t
 
 args = parser.parse_args()
 
-# argument variables
-# options = get_arguments()
-# input_file = options.input
-# output_file = options.output
 
 print('\n\t\t\t\t***DISCLAIMER***')
 print('''\nAll information returned from this script should be considered at face value and as a potential starting 
