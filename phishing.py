@@ -36,7 +36,7 @@ print(f'Input file: {input_file}')
 print(f'Output file: {output_file}')
 
 #try:
-if not path.exists(input): # or path:
+if not path.exists(input_file): # or path:
     print(f'File {input_file} not found.\nMake sure file exists and run script again.')
     sys.exit(0)
 else:
@@ -68,7 +68,7 @@ else:
 
             # date/time regex
 
-            #return[email, subject, sender, xsender, reply]
+            return[email, subject, sender, xsender, reply]
 
             
     # file output
