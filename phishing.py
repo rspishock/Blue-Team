@@ -35,65 +35,61 @@ sleep(8)
 print(f'Input file: {input_file}')
 print(f'Output file: {output_file}')
 
-# try:
-# if not path.exists(input): # or path:
-#     print(f'File {input_file} not found.\nMake sure file exists and run script again.')
-#     sys.exit(0)
-# else:
-#     # path.exists(input_file):
-#     print(f'Parsing {input_file}...')
-#     with open(input_file) as file_object:
-#         for line in file_object:
-#             # Metadata regexes
+#try:
+if not path.exists(input): # or path:
+    print(f'File {input_file} not found.\nMake sure file exists and run script again.')
+    sys.exit(0)
+else:
+    # path.exists(input_file):
+    print(f'Parsing {input_file}...')
+    with open(input_file) as file_object:
+        for line in file_object:
+            # Metadata regexes
 
-#             # recipient regex
-#             recipient_regex = re.compile(f'[a-z0-9]@[a-z0-9]\.[a-z]')
-#             recipient = recipient_regex.search(line)
+            # recipient regex
+            recipient_regex = re.compile(f'[a-z0-9]@[a-z0-9]\.[a-z]')
+            recipient = recipient_regex.search(line)
 
-#             # subject regex
-#             subject_regex = re.compile(f'Subject [a-zA-Z0-9_\s]+')
-#             subject = subject_regex.search(line)
+            # subject regex
+            subject_regex = re.compile(f'Subject [a-zA-Z0-9_\s]+')
+            subject = subject_regex.search(line)
 
-#             # sender regex
-#             sender_regex = re.compile(f'From [a-zA-Z0-9_\s]+]')
-#             sender = sender_regex.search(line)
+            # sender regex
+            sender_regex = re.compile(f'From [a-zA-Z0-9_\s]+]')
+            sender = sender_regex.search(line)
 
-#             # x-sender regex
-#             xsender_regex = re.compile(f'xsender [a-zA-Z0-9_\s]+')
-#             xsender = xsender_regex.search(line)
+            # x-sender regex
+            xsender_regex = re.compile(f'xsender [a-zA-Z0-9_\s]+')
+            xsender = xsender_regex.search(line)
             
-#             # reply regex
-#             reply_regex = re.compile(f'Reply [a-zA-Z0-9_\s]+')
-#             reply = reply_regex.search(line)
+            # reply regex
+            reply_regex = re.compile(f'Reply [a-zA-Z0-9_\s]+')
+            reply = reply_regex.search(line)
 
-#             # date/time regex
+            # date/time regex
 
-#             #return[email, subject, sender, xsender, reply]
+            #return[email, subject, sender, xsender, reply]
 
             
-#     # file output
-#     with open(output_file, 'w') as file_output:
-#         print(f'IOCs from file: {input_file}')
-#         # recipient
-#         for line in recipient:
-#             print(line)
-#         #[email, subject, sender, xsender, reply]
-#         #    print(f'email, subject, sender, xsender, reply]')
+    # file output
+    with open(output_file, 'w') as file_output:
+        print(f'IOCs from file: {input_file}')
+        # recipient
+        for line in recipient:
+            print(line)
+        #[email, subject, sender, xsender, reply]
+        #    print(f'email, subject, sender, xsender, reply]')
 
-#         # sender
-#         for line in sender:
-#             print(line)
+        # sender
+        for line in sender:
+            print(line)
 
-#         # x-sender
-#         for line in xsender:
-#             print(line)
+        # x-sender
+        for line in xsender:
+            print(line)
 
-#         # reply
-#         for line in reply:
-#             print(line)
+        # reply
+        for line in reply:
+            print(line)
 
-#     print(f'Script completed successfully.  Check "{output_file}" for more information.')
-
-# # else:
-# #     print(f'File {input_file} not found.\nMake sure file exists and run script again.')
-# #     sys.exit(0)
+    print(f'Script completed successfully.  Check "{output_file}" for more information.')
