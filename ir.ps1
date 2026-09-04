@@ -8,7 +8,7 @@ if (Test-Path -Path $DIRECTORY) {
     Remove-Item -Path $DIRECTORY
 } else {
     mkdir $DIRECTORY
-    cd $DIRECTORY
+    Set-Location $DIRECTORY
 }
 
 # *********************************************
@@ -19,13 +19,13 @@ if (Test-Path -Path $DIRECTORY) {
 
 
 # view network sessions
-echo "Sessions:" >> connections.txt
+Write-Output "Sessions:" >> connections.txt
 Get-NetTCPConnection >> connections.txt
 
 #lists information related to mapped connections
 
 
 # view active TCP connections
-echo "Active connections:"
+Write-Output "Active connections:"
 Get-NetTCPConnection -State Established >> connections.txt
 
