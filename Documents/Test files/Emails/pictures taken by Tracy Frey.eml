@@ -1,0 +1,770 @@
+Delivered-To: ryan.spishock@gmail.com
+Received: by 2002:a05:7108:3282:b0:30a:a64a:482b with SMTP id l2csp11234216gdl;
+        Sat, 1 Jul 2023 12:46:54 -0700 (PDT)
+X-Google-Smtp-Source: APBJJlENBrRoqxP9yXm+4yALxuJ6UuvJlrOZn5D06dLIm6xhoxJcheNSKjjLDn0tvuvbQpoK+DL7
+X-Received: by 2002:a05:6214:1049:b0:636:33c:b944 with SMTP id l9-20020a056214104900b00636033cb944mr6076829qvr.4.1688240814677;
+        Sat, 01 Jul 2023 12:46:54 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1688240814; cv=none;
+        d=google.com; s=arc-20160816;
+        b=VTT/meWqZgFGRyfe0OWGeMiyb5whQX+PzKnz5jYesYIGJPxg+f2o6pg9t5Mpnms/1J
+         WWOP/JQHGUCDqdMtrg1swvnNpUlUDwnZGoMV7SLtSIIWWbiY0LPaLEkrp9SNYxQesw5b
+         xAcVCnjeuMNwBo5o6LXAFY55M9UyTxpv/YeKRQcbq2OsMrgm9eBvHv/cYRXajmi3Wjpa
+         pSC6UGUSwbyJtdtnbnpBXaVeRsy9xxBqCB1y/kzLuT1Wmw+GiYu/ZKb+5YM1HuyRmbM0
+         mh/w66+3PusLD6fDRywOK5nCJwDPUnEsZ7HZ5bTPOZYT+XEJ1azGhVmYveHooVjZ7FPH
+         8qyw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=to:references:message-id:subject:date:mime-version:from
+         :content-transfer-encoding:dkim-signature;
+        bh=tXi6fyrDXWD3JXOoipD3d/gexhCEJN4P/+xgwKU3OVI=;
+        fh=PNaRZinmog5A0W0bwBKBoYUP8L1FzImDDQdXvxHFSQw=;
+        b=z/syNx2kqMNseIlkkaIAT6U49Wnlh+S4b/pg58H4NPLnv8KFtNPLfI0uTvchXe0lFW
+         2aoGjvPw6msbHyFV5zFiBv3r366jYoAy38vEA7gU0j9k3ex5ws6+YWw6PpeDjkLHugIw
+         ylGbNVyTPOORydzMxmN/WNvqRQbZWDgMEOMaZu36OlwfhbrkcDl6AY6VEVhbMLq7okud
+         Y6y1lH8MYNSil0ZHYXCHT3Nk++CZqUsPI0Eh0ELTfxPNj41XbiS/clLcFnwwhKbH/Sq9
+         peERxwtqLN3U7KAGDFJVjYDdRNIWg758Vf23bUb8yjeCqiEr9kx/7abOimaogNoWhZBG
+         WwXw==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@yahoo.com header.s=s2048 header.b=HYg3V7Qo;
+       spf=pass (google.com: domain of xmphire@yahoo.com designates 74.6.134.41 as permitted sender) smtp.mailfrom=xmphire@yahoo.com;
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=yahoo.com
+Return-Path: <xmphire@yahoo.com>
+Received: from sonic307-2.consmr.mail.bf2.yahoo.com (sonic307-2.consmr.mail.bf2.yahoo.com. [74.6.134.41])
+        by mx.google.com with ESMTPS id e2-20020a0562141d0200b00635e18cb451si8998306qvd.580.2023.07.01.12.46.54
+        for <ryan.spishock@gmail.com>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sat, 01 Jul 2023 12:46:54 -0700 (PDT)
+Received-SPF: pass (google.com: domain of xmphire@yahoo.com designates 74.6.134.41 as permitted sender) client-ip=74.6.134.41;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@yahoo.com header.s=s2048 header.b=HYg3V7Qo;
+       spf=pass (google.com: domain of xmphire@yahoo.com designates 74.6.134.41 as permitted sender) smtp.mailfrom=xmphire@yahoo.com;
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=yahoo.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1688240814; bh=tXi6fyrDXWD3JXOoipD3d/gexhCEJN4P/+xgwKU3OVI=; h=From:Date:Subject:References:To:From:Subject:Reply-To; b=HYg3V7QodbXs1jZ4f8jwnwI+rIc4cdb6MMLqTXKhmzImPtOaj5fcAGIUhcgyD6jajhrYvstpHC/Zb8aRyXyONM8wzL0H4K7KitAIHJVMdTZ2lPtb9CkNrNJKfus0JmiDEonkrfMIgQBYpilVC2GQVVvQiCoNycE18F3V/pJ/Jeh4bMvMvpmMpgcOssE9N8j19IrXKtVap9cjWe+xfcimou55KZ/Gnje7xk/WrPRvnblBnjHvOonLZZk/tEZiEmMwZ3Anh+Os9HzGH4kFpf7pOyyCx+tanW5cCBcNnDhCCCeboWO4NCTZprfcx26LMfqDjvvqEsM2iBvXsIlrG8zifA==
+X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1688240814; bh=kVQqvanDe6ZTtPZNXoaI3LrMuBDAWnghTF4DYrR9+Cw=; h=X-Sonic-MF:From:Date:Subject:To:From:Subject; b=T1AmrPZebz1SX3CDJzFMZ5WYi4dVaTjh0wIN8ARxwZcQpzvx0NFj8D7+vfK6LORNpvVo8ZpHYUjk8nXK1sq1ejBqm5us+0KJBCkhzzXwKdSVSMBp1G4SyZucuBliMQ3DaUpNXmETCABulIrhz1iC8UfeBWjrrLOlzdvtVHen0EZpxCQDtjmAOD1NY+s/ppt8RjCKP5feZh9fBRyWj60MS+FOG6hK3Kmvb9Fe5XOlxi5Hb8MICjPpA/Jqv3bXvooi7q0Ps893PFsD2SI7//Z0aT96fIRxYwYxbuh+S3MuHP6uSANJuIiES2evy8nwkYZ85+ZQwwlIyWzJXgRrJxrd0Q==
+X-YMail-OSG: zeJKU.sVM1l73bBtCNBsExbjVOLk.UlNIVSaKN4VnaG7DtIr9DimQG9vJZyTBxV
+ ewaQbrtjAiSgzfqcw_edLUxQkADWyp7kevg5TvaZzMiS5x9SILqA.FTATJflXDVMq5szOH1IQpug
+ zpmho8UmNOrwQ2bag1nL7c80XuyCdNOGYo4fVMBSi5GhY60Og45QJMK8T30MNNT3ufR2ReCnJ.Lx
+ 2HzEBIJNCY1sZ_9hK6dZ_F3s91VD6HvHkQPG6sOTfca6NmIUgvJAF0X8v96UdFZmRHTWjDyK.5oZ
+ 3sSUlcKKwO9ZTG70IVQ2UHGr8ymh7UedaGhlaCZ6eE0IcmZwPC7v3_FoooKMP9BEg2UujsSUPt6K
+ HyiQeAaPL65aSV4cU4uPV4Bpda9lVSmzPW1DIbtl7s2ZWLtPL6SVNn0Vsg8FaMhU2HCJC.ZUbaCt
+ vwKzOVDipIkEa2MkPUgIe3I92DemZfOJS_Do7z..sbKjaj0y9_UCRPIRUcRpQav4yJ_gfBgsS9eg
+ dk1hZ9FznNdYBeAusF9dc.jtibTmLqsiJOUguVaVDhphlrqGX0Unia4WVCiZuR8qLL7A1_51c3ER
+ 3RVJLeH_DVLI0S0aANlNou1ruL8Efx5Nb_.ZFs4xgGEm6XALTquy6qPzozkwRAmEqf6UOiac2ZZj
+ aqYl7AKjT79Jvc74D2ghWeeG9RCWGDH_0CCrMLDm.eq1_E4MAnYaWlr7_i1n4psBCkTAw1qHqc4M
+ hx4MgIzWULk5pNe5SF5GLNjMFchtM0jiJ9dNdygPta2Sg3XPKjDKf.WeAB2fsB0V5YUxGTTTRzpO
+ iYVmWjpfKffYiN_2pmBBEeygOrdXDp.JLfhF4VoS4L33BTFxwS5AzTW8hOrhceBHgL80b1X6dYUs
+ jcCMWNALzlbPZa.gLLlEanUXsCY7VoN.DTfWWOi2T.ZvFvhbo8gACg4REUjC7qT02Pt.pbW71cBp
+ lis_2TOnM.Nq5DD5mN9Z4Heb7p6CoRsrW7ofdDdMLG14bdJWvK3GAVGV1ggrpF_ubHBxzQa0JnwF
+ DEGpPJ2kNIJy.aMLU11pY6NK47gVgDvgRoRgUddC7cews4SjfSZg9YYsM0Ms9Bwsg420ZLTzvLI7
+ DGhRLypUtsnQ_hGrwlQ9zAQ1osMxtx8At96MG0.AgQXCX4a1ha8s24UIbmwCKXhXp0cZuER01l3k
+ aIWKzAnAgYrZMTgyLx9Sw0l3mkRKNYSrTuinQrR_UnyKJ1cl4ox8b0olD3Vb3kgWa9YBkspXCT5u
+ Kr_XTvDotNeYLOoEMLdnhglKsvZJmZs_n3HbH59eaFenC0b_UoZLeJpbuEpqAGUuJTZWcbrVQM5V
+ BzubQ0wVBWhC_Vsys0hMD09FtVPvngRLIt_PxrJjbosPdxZEyxNfp6ddWU0hnkO7cus42IFnajBt
+ j5gTAX2su95E2Y3rm524IhgK1xO8Y14JstXflluV6X27HMhWqUbIL2Vjmwo4KDZwJTA7QqgeMH63
+ 5SM210xRbqBdOiycsebG6NClQJTK2nntHXlXKwkGI9QhUlc6P_kNgHSDEbhULCA8cqxvNT4ag8g0
+ 2vYtZKDL8qVEp0_5qPxLRKjCQr5v1nVzO_eLX3L.HutS6cEkYO9yNtxqiB_kR95wJt76IqWUykAt
+ mp1HQy7Qjvh32sIW5M9MGlCpeJTX3RRYZp2kpn7KqaQTXcb4Pl1oTeImcXVMNlNN.SY1iwCkH.by
+ 0OAgFmLnskJapJtwuf1_ZRpXXGlqr2M7aIhDdlINDKfKl0j3cA7ZJ1g1iTy7FeANzofy4B4.jtCu
+ JdCBLR8L1V44xxw_0ak81uC.BBtEJu0jJdWBcdpBf4moyo7NRzsG_sbH82ZJNpj3cIGB258Ud5aX
+ 1uNCnqUCv4d1QnG5p5kZG.UhmqTNwS9i.ppcwCcXB49k.qh2nDgnv2wkzUne.VgO.Zjxu6qBWX1o
+ .1cUQbafv0dk_vaWsfWB0J5gHFJqHqpiRUN1LZApx2JaLbIytEXiDdesNET0pkve.u2jKkZQBWFC
+ n31DhcAZ.Vsg3i18drusXu8pavhYYQrJ.avzEGb0JWQtPWT8FEaiSH2IdnZq080H_RDDbrUvj1Z5
+ Y3KKQGOMWKXcWi92WgJ0vEgrc.GrIVK9NXDIKOQQ2eQNCH5DQ8xYOSEcLQ3bMqi7U.03vIUDDUEU
+ km65oHUikr2sHtHcI0JCu4C0TasjcTgZK56JHkMRnS15gBifKQKdaKglA22UnIlIP25SNO9h5zpB
+ rlXyPgt42uoLMgTzmH2bn82JGZtpHFrVsjV.Ov7GPPIWAuksLb1nbgDEuWQ--
+X-Sonic-MF: <xmphire@yahoo.com>
+X-Sonic-ID: e9782201-8a13-4c33-8d03-1d9ad2557083
+Received: from sonic.gate.mail.ne1.yahoo.com by sonic307.consmr.mail.bf2.yahoo.com with HTTP; Sat, 1 Jul 2023 19:46:54 +0000
+Received: by hermes--production-ne1-6d679867d5-xspjz (Yahoo Inc. Hermes SMTP Server) with ESMTPA ID bfccd71bee9365aa538cede70f296a0b;
+          Sat, 01 Jul 2023 19:46:52 +0000 (UTC)
+Content-Type: multipart/alternative; boundary=Apple-Mail-DD495D53-0041-49FB-9427-26C8DC488ACE
+Content-Transfer-Encoding: 7bit
+From: Leslie Spishock <xmphire@yahoo.com>
+Mime-Version: 1.0 (1.0)
+Date: Sat, 1 Jul 2023 15:46:41 -0400
+Subject: Fwd: pictures taken by Tracy Frey
+Message-Id: <71CD4A20-8B12-4B09-A0C3-E70B23BF38EB@yahoo.com>
+References: <BYAPR05MB6614A4F222EAAC1B7209A08FB82AA@BYAPR05MB6614.namprd05.prod.outlook.com>
+To: Ryan <ryan.spishock@gmail.com>
+X-Mailer: iPhone Mail (20F75)
+Content-Length: 14015
+
+
+--Apple-Mail-DD495D53-0041-49FB-9427-26C8DC488ACE
+Content-Type: text/plain;
+	charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+
+
+Sent from my iPhone
+
+Begin forwarded message:
+
+> From: Tracy Frey <esmeralda.sanchezmz@uanl.edu.mx>
+> Date: June 30, 2023 at 12:28:57 PM EDT
+> To: xmphire@yahoo.com
+> Subject: pictures taken by Tracy Frey
+>=20
+> =EF=BB=BF
+> On Friday, June 30, 2023 10:21 AM, Tracy wrote:
+> Hopefully you can recollect these: http://www.txnvy.wcaalrei.com/
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+> aln
+> Aviso de confidencialidad de la UANL
+> La informaci=C3=B3n contenida en este correo electr=C3=B3nico est=C3=A1 di=
+rigida s=C3=B3lo a su destinatario. El mensaje y cualquier archivo adjunto p=
+ueden contener informaci=C3=B3n confidencial, y la distribuci=C3=B3n il=C3=AD=
+cita o la comunicaci=C3=B3n de esa informaci=C3=B3n est=C3=A1 prohibida. Si u=
+sted recibe este mensaje por error, favor de notificar inmediatamente al rem=
+itente por correo de respuesta y elimine el correo electr=C3=B3nico incluyen=
+do archivos adjuntos.
+
+--Apple-Mail-DD495D53-0041-49FB-9427-26C8DC488ACE
+Content-Type: text/html;
+	charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<html><head><meta http-equiv=3D"content-type" content=3D"text/html; charset=3D=
+utf-8"></head><body dir=3D"auto"><br><br><div dir=3D"ltr">Sent from my iPhon=
+e</div><div dir=3D"ltr"><br>Begin forwarded message:<br><br></div><blockquot=
+e type=3D"cite"><div dir=3D"ltr"><b>From:</b> Tracy Frey &lt;esmeralda.sanch=
+ezmz@uanl.edu.mx&gt;<br><b>Date:</b> June 30, 2023 at 12:28:57 PM EDT<br><b>=
+To:</b> xmphire@yahoo.com<br><b>Subject:</b> <b>pictures taken by Tracy Frey=
+</b><br><br></div></blockquote><blockquote type=3D"cite"><div dir=3D"ltr">=EF=
+=BB=BF<span></span><br><span>On Friday, June 30, 2023 10:21 AM, Tracy wrote:=
+</span><br><span>Hopefully you can recollect these: http://www.txnvy.wcaalre=
+i.com/</span><br><span></span><br><span></span><br><span></span><br><span></=
+span><br><span></span><br><span></span><br><span></span><br><span></span><br=
+><span></span><br><span></span><br><span></span><br><span></span><br><span><=
+/span><br><span></span><br><span></span><br><span></span><br><span></span><b=
+r><span></span><br><span></span><br><span></span><br><span></span><br><span>=
+</span><br><span></span><br><span></span><br><span></span><br><span></span><=
+br><span></span><br><span></span><br><span></span><br><span></span><br><span=
+></span><br><span></span><br><span></span><br><span></span><br><span></span>=
+<br><span></span><br><span></span><br><span></span><br><span></span><br><spa=
+n></span><br><span></span><br><span></span><br><span></span><br><span></span=
+><br><span></span><br><span></span><br><span></span><br><span></span><br><sp=
+an></span><br><span></span><br><span></span><br><span></span><br><span></spa=
+n><br><span></span><br><span></span><br><span></span><br><span></span><br><s=
+pan></span><br><span></span><br><span></span><br><span></span><br><span></sp=
+an><br><span></span><br><span></span><br><span></span><br><span></span><br><=
+span></span><br><span></span><br><span></span><br><span></span><br><span></s=
+pan><br><span></span><br><span></span><br><span></span><br><span></span><br>=
+<span></span><br><span></span><br><span></span><br><span></span><br><span></=
+span><br><span></span><br><span></span><br><span></span><br><span></span><br=
+><span></span><br><span></span><br><span></span><br><span></span><br><span><=
+/span><br><span></span><br><span></span><br><span></span><br><span></span><b=
+r><span></span><br><span></span><br><span></span><br><span></span><br><span>=
+</span><br><span></span><br><span></span><br><span></span><br><span></span><=
+br><span></span><br><span></span><br><span></span><br><span></span><br><span=
+></span><br><span></span><br><span></span><br><span></span><br><span></span>=
+<br><span></span><br><span></span><br><span></span><br><span></span><br><spa=
+n></span><br><span></span><br><span></span><br><span></span><br><span></span=
+><br><span></span><br><span></span><br><span></span><br><span></span><br><sp=
+an></span><br><span></span><br><span></span><br><span></span><br><span></spa=
+n><br><span></span><br><span></span><br><span></span><br><span></span><br><s=
+pan></span><br><span></span><br><span></span><br><span></span><br><span></sp=
+an><br><span></span><br><span></span><br><span></span><br><span></span><br><=
+span></span><br><span></span><br><span></span><br><span></span><br><span></s=
+pan><br><span></span><br><span></span><br><span></span><br><span></span><br>=
+<span></span><br><span></span><br><span></span><br><span></span><br><span></=
+span><br><span></span><br><span></span><br><span></span><br><span></span><br=
+><span></span><br><span></span><br><span></span><br><span></span><br><span><=
+/span><br><span></span><br><span></span><br><span></span><br><span></span><b=
+r><span></span><br><span></span><br><span></span><br><span></span><br><span>=
+</span><br><span></span><br><span></span><br><span></span><br><span></span><=
+br><span></span><br><span></span><br><span></span><br><span></span><br><span=
+></span><br><span></span><br><span></span><br><span></span><br><span></span>=
+<br><span></span><br><span></span><br><span></span><br><span></span><br><spa=
+n></span><br><span></span><br><span></span><br><span></span><br><span></span=
+><br><span></span><br><span></span><br><span></span><br><span></span><br><sp=
+an></span><br><span></span><br><span></span><br><span></span><br><span></spa=
+n><br><span></span><br><span></span><br><span></span><br><span></span><br><s=
+pan></span><br><span></span><br><span></span><br><span></span><br><span></sp=
+an><br><span></span><br><span></span><br><span></span><br><span></span><br><=
+span></span><br><span></span><br><span></span><br><span></span><br><span></s=
+pan><br><span></span><br><span></span><br><span></span><br><span></span><br>=
+<span></span><br><span></span><br><span></span><br><span></span><br><span></=
+span><br><span></span><br><span></span><br><span></span><br><span></span><br=
+><span></span><br><span></span><br><span></span><br><span></span><br><span><=
+/span><br><span></span><br><span></span><br><span></span><br><span></span><b=
+r><span></span><br><span></span><br><span></span><br><span></span><br><span>=
+</span><br><span></span><br><span></span><br><span></span><br><span></span><=
+br><span></span><br><span></span><br><span></span><br><span></span><br><span=
+></span><br><span></span><br><span></span><br><span></span><br><span></span>=
+<br><span></span><br><span></span><br><span></span><br><span></span><br><spa=
+n></span><br><span></span><br><span></span><br><span></span><br><span></span=
+><br><span></span><br><span></span><br><span></span><br><span></span><br><sp=
+an></span><br><span></span><br><span></span><br><span></span><br><span></spa=
+n><br><span></span><br><span></span><br><span></span><br><span></span><br><s=
+pan></span><br><span></span><br><span></span><br><span></span><br><span></sp=
+an><br><span></span><br><span></span><br><span></span><br><span></span><br><=
+span></span><br><span></span><br><span></span><br><span></span><br><span></s=
+pan><br><span></span><br><span></span><br><span></span><br><span></span><br>=
+<span></span><br><span></span><br><span></span><br><span></span><br><span></=
+span><br><span></span><br><span></span><br><span></span><br><span></span><br=
+><span></span><br><span></span><br><span></span><br><span></span><br><span><=
+/span><br><span></span><br><span></span><br><span></span><br><span></span><b=
+r><span></span><br><span></span><br><span></span><br><span></span><br><span>=
+</span><br><span></span><br><span></span><br><span></span><br><span></span><=
+br><span></span><br><span></span><br><span></span><br><span></span><br><span=
+></span><br><span></span><br><span></span><br><span></span><br><span></span>=
+<br><span></span><br><span></span><br><span></span><br><span></span><br><spa=
+n></span><br><span></span><br><span></span><br><span></span><br><span></span=
+><br><span></span><br><span></span><br><span></span><br><span></span><br><sp=
+an></span><br><span></span><br><span></span><br><span></span><br><span></spa=
+n><br><span></span><br><span></span><br><span></span><br><span></span><br><s=
+pan></span><br><span></span><br><span></span><br><span></span><br><span></sp=
+an><br><span></span><br><span></span><br><span></span><br><span></span><br><=
+span></span><br><span></span><br><span></span><br><span></span><br><span></s=
+pan><br><span></span><br><span></span><br><span></span><br><span></span><br>=
+<span></span><br><span></span><br><span></span><br><span></span><br><span></=
+span><br><span></span><br><span></span><br><span></span><br><span></span><br=
+><span></span><br><span></span><br><span></span><br><span></span><br><span><=
+/span><br><span></span><br><span></span><br><span></span><br><span></span><b=
+r><span></span><br><span></span><br><span></span><br><span></span><br><span>=
+</span><br><span></span><br><span></span><br><span></span><br><span></span><=
+br><span></span><br><span></span><br><span></span><br><span></span><br><span=
+></span><br><span></span><br><span></span><br><span></span><br><span></span>=
+<br><span></span><br><span></span><br><span></span><br><span></span><br><spa=
+n></span><br><span></span><br><span></span><br><span></span><br><span></span=
+><br><span></span><br><span></span><br><span></span><br><span></span><br><sp=
+an></span><br><span></span><br><span></span><br><span></span><br><span></spa=
+n><br><span></span><br><span></span><br><span></span><br><span></span><br><s=
+pan></span><br><span></span><br><span></span><br><span></span><br><span></sp=
+an><br><span></span><br><span></span><br><span></span><br><span></span><br><=
+span></span><br><span></span><br><span></span><br><span></span><br><span></s=
+pan><br><span></span><br><span></span><br><span></span><br><span></span><br>=
+<span></span><br><span></span><br><span></span><br><span></span><br><span></=
+span><br><span></span><br><span></span><br><span></span><br><span></span><br=
+><span></span><br><span></span><br><span></span><br><span></span><br><span><=
+/span><br><span></span><br><span></span><br><span></span><br><span></span><b=
+r><span></span><br><span></span><br><span></span><br><span></span><br><span>=
+</span><br><span></span><br><span></span><br><span></span><br><span></span><=
+br><span></span><br><span></span><br><span></span><br><span></span><br><span=
+></span><br><span></span><br><span></span><br><span></span><br><span></span>=
+<br><span></span><br><span></span><br><span></span><br><span></span><br><spa=
+n></span><br><span></span><br><span></span><br><span></span><br><span></span=
+><br><span></span><br><span></span><br><span></span><br><span></span><br><sp=
+an></span><br><span></span><br><span></span><br><span></span><br><span></spa=
+n><br><span></span><br><span></span><br><span>aln</span><br><span>Aviso de c=
+onfidencialidad de la UANL</span><br><span>La informaci=C3=B3n contenida en e=
+ste correo electr=C3=B3nico est=C3=A1 dirigida s=C3=B3lo a su destinatario. E=
+l mensaje y cualquier archivo adjunto pueden contener informaci=C3=B3n confi=
+dencial, y la distribuci=C3=B3n il=C3=ADcita o la comunicaci=C3=B3n de esa i=
+nformaci=C3=B3n est=C3=A1 prohibida. Si usted recibe este mensaje por error,=
+ favor de notificar inmediatamente al remitente por correo de respuesta y el=
+imine el correo electr=C3=B3nico incluyendo archivos adjuntos.</span><br></d=
+iv></blockquote></body></html>=
+
+--Apple-Mail-DD495D53-0041-49FB-9427-26C8DC488ACE--

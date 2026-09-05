@@ -1,0 +1,261 @@
+Delivered-To: ryan.spishock@gmail.com
+Received: by 2002:a4a:7251:0:0:0:0:0 with SMTP id r17csp2487285ooe;
+        Mon, 5 Sep 2022 00:14:49 -0700 (PDT)
+X-Google-Smtp-Source: AA6agR5KhyS1KjksL0Iw/AsgU9egiufiZPU05ZANoKsotvUk/yI49Ye/7zNRuKZUSO7rB0bRpmAm
+X-Received: by 2002:a17:906:478d:b0:751:2181:87a7 with SMTP id cw13-20020a170906478d00b00751218187a7mr9757547ejc.715.1662362089597;
+        Mon, 05 Sep 2022 00:14:49 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1662362089; cv=none;
+        d=google.com; s=arc-20160816;
+        b=qGOJ4lk5CcLW7u49DrReX0eZ+3rU5cV5vd3Vvwg5fCOMReOH06UI5LuNxsJciSAVrN
+         VQEGjbHjj7+wk5FFkRXbzW9bZ2xTwX4ijyt9KPhdZRddRVJzud3XC97RniaK1vkE69B+
+         tHipbMJfpEgTW4tmuZh+Z6xigpYnNEFKhgZhXKrMBFyNUXv0G5WjFNydKi/xUMUMG+jl
+         4DN1l1DIXJ3y+pS3fUPpIkrY7OB1DYQfmcAHLYoJzaYbUABP44m17eAYgMNdIXFVnNzZ
+         UckNZLuUWdZz9s4AczRZza6Zb+9PkvQpLwD4nielD4v24svz16SaKd2VKNuJEdQSm+Rr
+         UYXQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=message-id:reply-to:date:from:to:subject:content-description
+         :content-transfer-encoding:mime-version:dkim-signature;
+        bh=hYxfUQ7ZwgSJtEeh4Wffb4p5nNwDoZfRJ6cX01r83X0=;
+        b=0R6RtxdeGMKc2/MU1ajoCWw0aAVqKtjxZWqNVjfJIflNpECk8Dnio7YKbl4qrARFQD
+         S7XWl/nDXTERkQE2KzeuZwxj5jz5g7V3p8p+fF1Ii2LMdNLDPBJLaEVJeQ+jngLd/Msr
+         s70ua13yaI91flH2w2otxGwN8CiWsspbMIvg6UaSrBUAc478MYdpx+BP80Ve1Kv2UDMf
+         AEIUlw5LBsJpc8EO3zP46aBbKF+vbTpxCQe/YL/pq4IOqUjWC7ApyX0xRtMRVrNiHYkG
+         qPZJJF9Z41TYkjN81/K2AC5o/8yxDSDDniS8cdnFOZ+kqeVtt1i1mE4Ks5GkEkNoKKlH
+         K+Gg==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@email.cz header.s=beta header.b=kyyzHd2A;
+       spf=pass (google.com: domain of kobemar1@email.cz designates 2a02:598:a::78:125 as permitted sender) smtp.mailfrom=kobemar1@email.cz;
+       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=email.cz
+Return-Path: <kobemar1@email.cz>
+Received: from mxs1.seznam.cz (mxs1.seznam.cz. [2a02:598:a::78:125])
+        by mx.google.com with ESMTPS id b18-20020a056402351200b00447bac04bdcsi8585819edd.42.2022.09.05.00.14.49
+        for <ryan.spishock@gmail.com>
+        (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
+        Mon, 05 Sep 2022 00:14:49 -0700 (PDT)
+Received-SPF: pass (google.com: domain of kobemar1@email.cz designates 2a02:598:a::78:125 as permitted sender) client-ip=2a02:598:a::78:125;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@email.cz header.s=beta header.b=kyyzHd2A;
+       spf=pass (google.com: domain of kobemar1@email.cz designates 2a02:598:a::78:125 as permitted sender) smtp.mailfrom=kobemar1@email.cz;
+       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=email.cz
+Received: from email.seznam.cz
+	by email-smtpc27a.ko.seznam.cz (email-smtpc27a.ko.seznam.cz [10.53.18.38])
+	id 23233fb282bde1a32250d83d;
+	Mon, 05 Sep 2022 09:14:49 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=email.cz; s=beta;
+	t=1662362089; bh=hYxfUQ7ZwgSJtEeh4Wffb4p5nNwDoZfRJ6cX01r83X0=;
+	h=Received:Content-Type:MIME-Version:Content-Transfer-Encoding:
+	 Content-Description:Subject:To:From:Date:Reply-To:Message-Id;
+	b=kyyzHd2Ay4fuTBvJ3WC2PcDwScm55JORvs5ZZzbUGd0EGbm6Df+kqnTtBPDLOZ1K3
+	 vZwwQLISBClvo2wS9f7+2qu7StD8f/XiAapOf7j20y83wUd9i+l+/IdaFK2NMaHvsx
+	 KHcgWPSo9WvmEe20Dy4FbM0RfUkeL/b1hgHzxrzI=
+Received: from [192.168.42.209] (103.103.57.93 [103.103.57.93])
+	by email-relay16.ng.seznam.cz (Seznam SMTPD 1.3.137) with ESMTP;
+	Mon, 05 Sep 2022 09:14:46 +0200 (CEST)  
+Content-Type: text/plain; charset="iso-8859-1"
+MIME-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Description: Mail message body
+Subject: *** Kindly send your personal details
+To: ryan.spishock@gmail.com
+From: "ANDERSON LINCOLN" <kobemar1@email.cz>
+Date: Mon, 05 Sep 2022 12:54:55 +0530
+Reply-To: drbeatriceclem.entsm@gmail.com
+Message-Id: <n}.1sqTQ.6cBG6qNx{gG.1Z5Q7f@seznam.cz>
+
+FINANCIAL INTELLIGENCE CENTRE CANADA, (FIC)                                =
+              =
+
+234, LAURIER AVE W,
+OTTAWA, ON K1P 1H7,
+CANADA.
+
+
+Dear Email Owner/Fund Beneficiary,
+
+
+              (IRREVOCABLE PAYMENT ORDER VIA ATM MASTER CARD)
+
+
+This message is directed to you based on the letter we received from the Hu=
+man settlement Centre, Financial Intelligence Centre (FIC) and Internationa=
+l Monetary Fund Agency, (I.M.F) and the G20 Summit meeting headed last rega=
+rding the settlement and financial stimulus Inheritance  benefits funds to =
+individual Beneficiaries.
+
+Now we have been authorized by the Human settlement and Financial Intellige=
+nce Centre Head Office in Canada and the International Monetary Fund (IMF) =
+Secretary General to contact you for your overdue payment. This is the 2nd =
+time your Payment file has come to our notice, and every time an executive =
+Order comes from the Executive committee and board of directors ordering th=
+at your fund should be recalled back to the World Bank Escrow account, with=
+out any genuine reason. Meanwhile, our Payment Settlement System (PSS) has =
+received another permanent Authority/Irrevocable Release/Unconditional paym=
+ents guarantee by the Human Settlement to pay off your financial stimulus /=
+Inheritance Fund via ATM Master Card.
+
+Also note that from the record in our file, your outstanding Winning accumu=
+lated payment is $3,500,000.00 U.S.D. (THREE MILLION FIVE HUNDRED THOUSAND =
+UNITED STATE DOLLARS ONLY). Now your new Payment Reference No.-FIC/033183, =
+Allocation No: 28634PG Pin Code: 1155. And your Certificate of Merit Paymen=
+t No: 102, ATM Master Card Released Code No: 0779. Immediate Telex Confirma=
+tion No: 222-2938-11, Secret Code No: XXGFI17, having received these vital =
+payment numbers, therefore you are now qualified to receive and confirm you=
+r overdue payment of $3,500,000.00 U.S.D. =
+
+
+To issue the ATM MASTER-CARD, you are therefore advised to contact the belo=
+w person in charge, Note your settlement paying Centre may vary from our He=
+ad office here in Canada. This it's because the National Anti-Crime Commiss=
+ioner and the International Monetary Fund (IMF) and the Honourable Minister=
+ of Finance has given the order for your payout fund, Via Bank ATM Master-C=
+ard or a Direct bank wire transfer as a global financial payment Technology=
+ that enables individual customer, to use digital currency instead of cash =
+and cheque, Kindly contact the below  person with your complete and correct=
+ personal information for your  ATM Master-Card issuance.  =
+
+Kindly send your personal information to this E-mail only drbeatriceclem.en=
+tsm@gmail.com =
+
+IMPORTANT NOTICE:  Please be advised that you are requested to send your pe=
+rsonal information as required below to the E-mail address clearly specifie=
+d here for a fast response.   drbeatriceclem.entsm@gmail.com
+
+1. Your Full Name:
+2. Your Age:
+3. Cell/Mobile Number:
+4. Occupation:
+5. Postal Address /Po Box:
+6. Country of Origin:
+7. Country of residence:
+8. Current State:    =
+
+9. Current City: =
+
+10. Copy of your valid Identification
+
+CONTACT:
+
+Dr. Beatrice Clement
+Processing Manager
+Financial Intelligence Centre (FIC)
+Ottawa, Canada.
+E-mail drbeatriceclem.entsm@gmail.com
+Direct Office Line: +1(587)209-4748
+
+
+IMPORTANT NOTICE: The United Nations Anti-Crime Commission and the Internat=
+ional Monetary Fund (IMF) do not instruct any other Processing Manager or A=
+gent for your payment except (Dr. Beatrice Clement), whose personal contact=
+ information has been provided above.
+
+Thanks for your understanding as you follow instructions.
+
+YOURS SINCERELY.
+MR. ANDERSON LINCOLN
+PUBLIC RELATION
+OFFICER, (FIC) CANADA =
+
+
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D
+CENTRO DE INTELIGENCIA FINANCIERA DE CANAD=C1, (FIC)                       =
+                  =
+
+234, LAURIER AVE W,
+OTTAWA, EN K1P 1H7,
+CANAD=C1.
+
+
+Estimado propietario del correo electr=F3nico / beneficiario del fondo,
+
+
+              (ORDEN DE PAGO IRREVOCABLE A TRAV=C9S DE ATM MASTER-CARD)
+
+
+Este mensaje est=E1 dirigido a usted en base a la carta que recibimos del C=
+entro de Asentamientos Humanos, el Centro de Inteligencia Financiera (FIC) =
+y la Agencia del Fondo Monetario Internacional, (I.M.F) y la reuni=F3n de l=
+a Cumbre del G20 encabezada por =FAltima vez con respecto a la liquidaci=F3=
+n y el est=EDmulo financiero Fondos de beneficios de herencia a beneficiari=
+os individuales.
+
+Ahora hemos sido autorizados por la Oficina Central del Centro de Inteligen=
+cia Financiera y de Asentamientos Humanos en Canad=E1 y el Secretario Gener=
+al del Fondo Monetario Internacional (FMI) para contactarlo para su pago at=
+rasado. Esta es la 2=AA vez que su archivo de pago ha llegado a nuestro con=
+ocimiento, y cada vez que una Orden Ejecutiva proviene del comit=E9 ejecuti=
+vo y la junta directiva que ordena que su fondo sea retirado a la cuenta de=
+ Dep=F3sito en Garant=EDa del Banco Mundial, sin ninguna raz=F3n genuina. M=
+ientras tanto, nuestro Sistema de Liquidaci=F3n de Pagos (PSS) ha recibido =
+otra Autoridad permanente / Liberaci=F3n Irrevocable / Garant=EDa de pagos =
+incondicionales por parte del Acuerdo Humano para pagar su est=EDmulo finan=
+ciero / Fondo de Herencia a trav=E9s de atm Master Card.
+
+Tambi=E9n tenga en cuenta que del registro en nuestro archivo, su pago acum=
+ulado ganador pendiente es de $ 3,500,000.00 U.S.D. (TRES MILLONES QUINIENT=
+OS MIL D=D3LARES ESTADOUNIDENSES SOLAMENTE). Ahora su nuevo n=FAmero de ref=
+erencia de pago-FIC / 033183, n=FAmero de asignaci=F3n: 28634PG C=F3digo PI=
+N: 1155. Y su Certificado de Pago de M=E9rito No: 102, Tarjeta Maestra de C=
+ajero Autom=E1tico C=F3digo Liberado No: 0779. N=FAmero de confirmaci=F3n d=
+e t=E9lex inmediato: 222-2938-11, C=F3digo secreto No: XXGFI17, Habiendo re=
+cibido estos n=FAmeros de pago vitales, por lo tanto, ahora est=E1 califica=
+do para recibir y confirmar su pago vencido de $ 3,500,000.00 U.S.D. =
+
+
+Para emitir la TARJETA MAESTRA DEL CAJERO AUTOM=C1TICO, le recomendamos que=
+ se comunique con la siguiente persona a cargo, tenga en cuenta que su Cent=
+ro de pago de liquidaci=F3n puede variar de nuestra oficina central aqu=ED =
+en Canad=E1. Esto se debe a que el Comisionado Nacional contra el Crimen y =
+el Fondo Monetario Internacional (FMI) y el Honorable Ministro de Finanzas =
+han dado la orden de su fondo de pago, a trav=E9s de la tarjeta maestra de =
+cajero autom=E1tico bancario o una transferencia bancaria directa como una =
+tecnolog=EDa de pago financiero global que permite al cliente individual, u=
+tilizar moneda digital en lugar de efectivo y cheque,  Por favor, p=F3ngase=
+ en contacto con la siguiente persona con su informaci=F3n personal complet=
+a y correcta para la emisi=F3n de su tarjeta maestra de cajero autom=E1tico=
+. =
+
+Por favor, env=EDe su informaci=F3n personal a este correo electr=F3nico so=
+lamente  drbeatriceclem.entsm@gmail.com
+ =
+
+AVISO IMPORTANTE:  Tenga en cuenta que se le solicita que env=EDe su inform=
+aci=F3n personal como se requiere a continuaci=F3n a la direcci=F3n de corr=
+eo electr=F3nico claramente especificada aqu=ED para una respuesta r=E1pida=
+..   drbeatriceclem.entsm@gmail.com
+
+1. Su nombre completo:
+2. Su edad:
+3. N=FAmero de celular / m=F3vil:
+4. Ocupaci=F3n:
+5. Direcci=F3n postal / Po Box:
+6. Pa=EDs de origen:
+7. Pa=EDs de residencia:
+8. Estado actual:   =
+
+9. Ciudad actual:
+10. Copia de su identificaci=F3n v=E1lida
+
+CONTACTO:
+
+Dra. Beatrice Clement
+Gerente de Procesamiento
+Centro de Inteligencia Financiera (FIC)
+Ottawa, Canad=E1.
+Correo electr=F3nico drbeatriceclem.entsm@gmail.com
+L=EDnea de oficina directa: +1(843)793-0728
+
+
+AVISO IMPORTANTE:  La Comisi=F3n de las Naciones Unidas contra el Crimen y =
+el Fondo Monetario Internacional (FMI) no instruyen a ning=FAn otro Gerente=
+ o Agente de Procesamiento para su pago, excepto (la Dra. Beatrice Clement)=
+, cuya informaci=F3n de contacto personal se ha proporcionado anteriormente.
+Gracias por su comprensi=F3n mientras sigue las instrucciones.
+
+ATENTAMENTE.
+RELACIONES P=DABLICAS
+OFICIAL, (FIC) CANAD=C1
