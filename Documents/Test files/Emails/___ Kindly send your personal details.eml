@@ -1,4 +1,4 @@
-Delivered-To: ryan.spishock@gmail.com
+Delivered-To: gmail_user@gmail.com
 Received: by 2002:a4a:7251:0:0:0:0:0 with SMTP id r17csp2487285ooe;
         Mon, 5 Sep 2022 00:14:49 -0700 (PDT)
 X-Google-Smtp-Source: AA6agR5KhyS1KjksL0Iw/AsgU9egiufiZPU05ZANoKsotvUk/yI49Ye/7zNRuKZUSO7rB0bRpmAm
@@ -29,7 +29,7 @@ ARC-Authentication-Results: i=1; mx.google.com;
 Return-Path: <kobemar1@email.cz>
 Received: from mxs1.seznam.cz (mxs1.seznam.cz. [2a02:598:a::78:125])
         by mx.google.com with ESMTPS id b18-20020a056402351200b00447bac04bdcsi8585819edd.42.2022.09.05.00.14.49
-        for <ryan.spishock@gmail.com>
+        for <gmail_user@gmail.com>
         (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
         Mon, 05 Sep 2022 00:14:49 -0700 (PDT)
 Received-SPF: pass (google.com: domain of kobemar1@email.cz designates 2a02:598:a::78:125 as permitted sender) client-ip=2a02:598:a::78:125;
@@ -56,7 +56,7 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Description: Mail message body
 Subject: *** Kindly send your personal details
-To: ryan.spishock@gmail.com
+To: gmail_user@gmail.com
 From: "ANDERSON LINCOLN" <kobemar1@email.cz>
 Date: Mon, 05 Sep 2022 12:54:55 +0530
 Reply-To: drbeatriceclem.entsm@gmail.com
