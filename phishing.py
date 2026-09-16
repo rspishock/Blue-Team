@@ -67,6 +67,17 @@ else:
             reply = reply_regex.search(line)
 
             # date/time regex
+            date_regex = (
+                r"^(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun), "  # Day of the week
+                r"\d{2} "  # Day of the month
+                r"(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) "  # Month
+                r"\d{4} "  # Year
+                r"\d{2}:\d{2}:\d{2} "  # Time (HH:MM:SS)
+                r"[+-]\d{4}$"  # Timezone offset
+            )
+            dates = re.compile(f'Date: {date_regex}')
+            date_search = dates.search(line)
+
 
             # return[email, subject, sender, xsender, reply]
 

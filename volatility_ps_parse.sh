@@ -1,7 +1,11 @@
 #! /bin/bash
 
+# args
+FILE = "$1"
+OS = 
+
 if ! command -v vol &> /dev/null && ! command -v volatility3 &> /dev/null; then
-    echo "Volatility not found. Installing Volatility 3..."
+    echo "Volatility not found, now installing..."
     pip3 install volatility3
 else
     echo "Volatility is already installed."
