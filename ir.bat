@@ -6,7 +6,9 @@ rem *        Environmental preperation          *
 rem *********************************************
 set directory=c:\Security_Test_%date:~4,4%-%date:~10,2%-%date:~7,2%_%time:~0,2%%time:~3,2%_%time:~6,5%
 if exist '%directory%' (
-    echo y | rd /s '%directory%'
+    echo "Creating backup and emoving existing directory."
+    robocopy "%directory%" "%directory%.bak" /MIR /Z
+    rem echo y | rd /s '%directory%'
 )
 md '%directory%'
 cd '%directory%'
